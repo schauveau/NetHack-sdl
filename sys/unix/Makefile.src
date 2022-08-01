@@ -274,6 +274,30 @@ WINQTOBJ = $(TARGETPFX)qt_bind.o $(TARGETPFX)qt_click.o \
 	$(TARGETPFX)qt_streq.o $(TARGETPFX)qt_svsel.o $(TARGETPFX)qt_win.o \
 	$(TARGETPFX)qt_xcmd.o $(TARGETPFX)qt_yndlg.o $(TARGETPFX)tile.o
 
+#
+# files for the SC interface
+#
+WINSCSRC = \
+ ../win/sc/SC_context.cpp \
+ ../win/sc/SC_main.cpp \
+ ../win/sc/SC_map.cpp \
+ ../win/sc/SC_menu.cpp \
+ ../win/sc/SC_message.cpp \
+ ../win/sc/SC_perminvent.cpp \
+ ../win/sc/SC_status.cpp \
+ ../win/sc/SC_text.cpp \
+ ../win/sc/SC_window.cpp 
+WINSCOBJ = \
+ $(TARGETPFX)SC_context.sc.o \
+ $(TARGETPFX)SC_main.sc.o \
+ $(TARGETPFX)SC_map.sc.o \
+ $(TARGETPFX)SC_menu.sc.o \
+ $(TARGETPFX)SC_message.sc.o \
+ $(TARGETPFX)SC_perminvent.sc.o \
+ $(TARGETPFX)SC_status.sc.o \
+ $(TARGETPFX)SC_text.sc.o \
+ $(TARGETPFX)SC_window.sc.o
+
 # Files for Shim windowing interface for libnh -- doesn't do anything,
 # just passes along the API calls to the library
 #
@@ -1057,6 +1081,10 @@ $(TARGETPFX)wc_chainout.o: ../win/chain/wc_chainout.c $(HACK_H)
 $(TARGETPFX)wc_trace.o: ../win/chain/wc_trace.c $(HACK_H) ../include/wintty.h \
 		../include/func_tab.h
 	$(TARGET_CC) $(TARGET_CFLAGS) -c -o $@ ../win/chain/wc_trace.c
+
+$(TARGETPFX)%.sc.o: ../win/SC/%.cpp $(HACK_H) ../win/SC/winSC.h
+	$(TARGET_CXX) $(TARGET_CXXFLAGS) $(SCCFLAGS) -c -o $@ $<
+
 $(TARGETPFX)allmain.o: allmain.c $(HACK_H)
 $(TARGETPFX)alloc.o: alloc.c $(CONFIG_H)
 $(TARGETPFX)apply.o: apply.c $(HACK_H)

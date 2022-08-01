@@ -251,6 +251,16 @@ else    # WANT_WIN_QT
 LINK = $(CC)
 endif	# !WANT_WIN_QT
 
+ifdef WANT_WIN_SC
+# TODO: QT c++ setting may interfere with sdl-cairo
+LINK = $(CXX)
+WINSCLIB =  $(shell pkg-config --libs sdl2 SDL2_ttf cairo )
+VARDATND0 += 
+POSTINSTALL += date > $(HACKDIR)/foobar ;
+SCCFLAGS = $(shell pkg-config --cflags sdl2 SDL2_ttf cairo )
+WINLIB += $(WINSCLIB)
+endif   # WANT_WIN_SC
+
 # prevent duplicate tile.o in WINOBJ
 WINOBJ = $(sort $(WINOBJ0))
 # prevent duplicates in VARDATND if both X11 and Qt are being supported

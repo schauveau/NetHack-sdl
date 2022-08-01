@@ -23,7 +23,7 @@
 # to include in your build. Doing it via the make command line means that won't
 # have to edit the Makefile.
 #
-# make WANT_WIN_QT=1 WANT_WIN_X11=1 WANT_WIN_CURSES=1 WANT_WIN_TTY=1 install
+# make WANT_WIN_QT=1 WANT_WIN_X11=1 WANT_WIN_CURSES=1 WANT_WIN_TTY=1 WANT_WIN_SC=1 install
 #
 # Add WANT_DEFAULT=Qt (or other interface) if you want nethack to use
 # something other than tty as the default interface.
@@ -33,14 +33,16 @@ ifdef WANT_WIN_ALL
 WANT_WIN_TTY=1
 WANT_WIN_CURSES=1
 WANT_WIN_X11=1
-WANT_WIN_QT=1
+WANT_WIN_SC=1
 else
 # Make sure that at least one interface is enabled.
 ifndef WANT_WIN_TTY
 ifndef  WANT_WIN_CURSES
 ifndef   WANT_WIN_X11
 ifndef    WANT_WIN_QT
+ifndef     WANT_WIN_SC
 WANT_WIN_TTY=1
+endif
 endif
 endif
 endif
@@ -68,7 +70,11 @@ else
 ifdef    WANT_WIN_QT
 WANT_DEFAULT=Qt
 else
+ifdef    WANT_WIN_SC
+WANT_DEFAULT=SC
+else
 # ? shouldn't be able to get here...
+endif
 endif
 endif
 endif
@@ -103,6 +109,13 @@ WINCFLAGS += -DQT_GRAPHICS
 WINSRC += $(WINQTSRC)
 WINOBJ0 += $(WINQTOBJ)
 endif
+
+ifdef WANT_WIN_SC
+WINCFLAGS += -DSC_GRAPHICS
+WINSRC += $(WINSCSRC)
+WINOBJ0 += $(WINSCOBJ)
+endif
+
 
 #end of hints/include/multiw-2.370
 #------------------------------------------------------------------------------

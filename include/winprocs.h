@@ -9,7 +9,7 @@
 
 enum wp_ids { wp_tty = 1, wp_X11, wp_Qt, wp_mswin, wp_curses, 
               wp_chainin, wp_chainout, wp_safestartup, wp_shim,
-	      wp_hup, wp_guistubs, wp_ttystubs,
+	      wp_hup, wp_guistubs, wp_ttystubs, wp_SC,
 #ifdef OUTDATED_STUFF
 	      , wp_mac, wp_Gem, wp_Gnome, wp_amii, wp_amiv
 #endif

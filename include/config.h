@@ -150,6 +150,12 @@
 #endif
 #endif
 
+#ifdef SC_GRAPHICS
+#ifndef DEFAULT_WINDOW_SYS
+#define DEFAULT_WINDOW_SYS "SC"
+#endif
+#endif
+
 #ifdef X11_GRAPHICS
 /*
  * There are two ways that X11 tiles may be defined.  (1) using a custom
